@@ -1,8 +1,8 @@
-<?php include "includes/header.php"; ?>
+<?php include "includes/admin_header.php"; ?>
 
 <div id="wrapper">
     <!-- Navigation -->
-    <?php include "includes/navigation.php"; ?>
+    <?php include "includes/admin_navigation.php"; ?>
 
     <div id="page-wrapper">
         <div class="container-fluid">
@@ -35,10 +35,19 @@
                             </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    $query = "SELECT * FROM category";
+                                    $result = mysqli_query($connection , $query);
+                                    if (!$result) {
+                                      die("QUERY FAILED" . mysqli_error($connection));
+                                    }
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                ?>
                                 <tr>
-                                    <td>1st cat</td>
-                                    <td>2nd cat</td>
+                                    <td><?php echo $row['cat_id'];?></td>
+                                    <td><?php echo $row['cat_title'];?></td>
                                 </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -50,4 +59,4 @@
 </div><!-- /#wrapper -->
 
 
-<?php include "includes/footer.php"; ?>
+<?php include "includes/admin_footer.php"; ?>
