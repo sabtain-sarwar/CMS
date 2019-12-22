@@ -15,7 +15,23 @@
                     </h1>
 
                     <div class="col-xs-6">
-                        <form action="">
+                        <?php
+                            if(isset($_POST['submit'])) {
+                                $cat_title =  $_POST['cat_title'];
+                                if ($cat_title == "" || empty($cat_title)) {
+                                    echo "This field should not be empty";
+                                } else {
+                                    $query = "INSERT INTO category(cat_title) VALUES ('$cat_title')";
+                                    $result = mysqli_query($connection , $query);
+                                    if (!$result) {
+                                        die("QUERY FAILED" . mysqli_error($connection));
+                                    } else {
+                                        echo "Successfully inserted";
+                                    }
+                                }
+                            }
+                        ?>
+                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="cat-title">Add Category</label>
                                 <input type="text" class="form-control" name="cat_title" id="cat-title">
