@@ -21,9 +21,9 @@
                         //echo "<li><a href='#'> {$row['cat_title']} </a></li>";}
                 ?>
                 <li>
-                    <a href="#"> <?php echo $row['cat_title'];}  ?></a>
+                    <a href="#"> <?php echo $row['cat_title'];  ?></a>
                 </li>
-                <?php  ?>
+                <?php } ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
