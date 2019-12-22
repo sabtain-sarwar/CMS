@@ -18,12 +18,12 @@
                     $query = "SELECT * FROM category";
                     $result = mysqli_query($connection , $query);
                     while($row = mysqli_fetch_assoc($result)) {
-                        //echo "<li><a href='#'> {$row['cat_title']} </a></li>";}
+                        echo "<li><a href='#'> {$row['cat_title']} </a></li>";
+                    }
                 ?>
                 <li>
-                    <a href="#"> <?php echo $row['cat_title'];  ?></a>
+                    <a href="admin">Admin</a>
                 </li>
-                <?php } ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
