@@ -21,8 +21,8 @@
                         }
 
                         switch ($source) {
-                            case 'a':
-                            echo 'a';
+                            case 'add_post':
+                                include "includes/add_post.php";
                             break;
 
                             default:
