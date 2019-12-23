@@ -1,3 +1,12 @@
+<?php
+    if (isset($_GET['delete'])) {
+        $post_id = $_GET['delete'];
+        $query = "DELETE from posts WHERE post_id = {$post_id}";
+        $result = mysqli_query($connection , $query);
+        confirm($result);
+    }
+?>
+
 <table class="table table-bordered table-hover">
     <thead>
     <tr>
@@ -30,6 +39,7 @@
         echo "<td>{$row['post_tags']}</td>";
         echo "<td>{$row['post_comment_count']}</td>";
         echo "<td>{$row['post_date']}</td>";
+        echo "<td><a href='posts.php?delete={$row['post_id']}'>Delete</a></td>";
         echo "</tr>";
     }
     ?>
