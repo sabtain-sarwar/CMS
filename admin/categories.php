@@ -15,22 +15,7 @@
                     </h1>
 
                     <div class="col-xs-6">
-                        <?php   // Create and insert the categories
-                            if(isset($_POST['submit'])) {
-                                $cat_title =  $_POST['cat_title'];
-                                if ($cat_title == "" || empty($cat_title)) {
-                                    echo "This field should not be empty";
-                                } else {
-                                    $query = "INSERT INTO category(cat_title) VALUES ('$cat_title')";
-                                    $result = mysqli_query($connection , $query);
-                                    if (!$result) {
-                                        die("QUERY FAILED" . mysqli_error($connection));
-                                    } else {
-                                        echo "Successfully inserted";
-                                    }
-                                }
-                            }
-                        ?>
+                        <?php insertCategories(); ?>
                         <form action="" method="post">
                             <div class="form-group">
                                 <label for="cat-title">Add Category</label>
@@ -76,17 +61,7 @@
                     </div>
 
                     <div class="col-xs-6">
-                        <?php   // Delete the specified category
-                            if(isset($_GET['delete'])) {
-                                $id = $_GET['delete'];
-                                $query = "DELETE FROM category WHERE cat_id = {$id}";
-                                $result = mysqli_query($connection , $query);
-                                if (!$result) {
-                                    die("QUERY FAILED" . mysqli_error($connection));
-                                }
-                                header("Location: categories.php");
-                            }
-                        ?>
+                        <?php deleteCategories(); ?>
                         <table class="table table-bordered table-hover">
                             <thead>
                             <tr>
@@ -95,21 +70,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <?php   // Fetch all Categories
-                                    $query = "SELECT * FROM category";
-                                    $result = mysqli_query($connection , $query);
-                                    if (!$result) {
-                                      die("QUERY FAILED" . mysqli_error($connection));
-                                    }
-                                    while($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                <tr>
-                                    <td><?php echo $row['cat_id'];?></td>
-                                    <td><?php echo $row['cat_title'];?></td>
-                                    <td><a href="categories.php?delete=<?php echo $row['cat_id'];?>">Delete</a></td>
-                                    <td><a href="categories.php?edit=<?php echo $row['cat_id'];?>">Edit</a></td>
-                                </tr>
-                                <?php } ?>
+                                <?php findAllCategories(); ?>
                             </tbody>
                         </table>
                     </div>
