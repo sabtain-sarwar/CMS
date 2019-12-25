@@ -40,6 +40,7 @@
         echo "<td>{$row['post_comment_count']}</td>";
         echo "<td>{$row['post_date']}</td>";
         echo "<td><a href='posts.php?delete={$row['post_id']}'>Delete</a></td>";
+        echo "<td><a href='posts.php?source=edit_post&edit={$row['post_id']}'>Edit</a></td>";
         echo "</tr>";
     }
     ?>
