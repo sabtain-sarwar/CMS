@@ -33,16 +33,20 @@ if(isset($_POST['create_post'])){
     </div>
 
     <div class="form-group">
-        <label for="category_id">Post Category ID</label>
-        <input type="text" name="post_category_id" class="form-control">
-    </div>
-
-    <!--<div class="form-group">
         <label for="category">Category</label>
-        <select name="post_category" id="" class="form-control" style="width:130px">
-
+        <select name="post_category_id" id="" class="form-control" style="width:130px">
+            <?php
+            $query = "SELECT * FROM category";
+            $result = mysqli_query($connection , $query);
+            confirm($result);
+            while ($row1 = mysqli_fetch_assoc($result)) {
+                $cat_id     = $row1['cat_id'];
+                $cat_title  = $row1['cat_title'];
+                echo "<option value='{$cat_id}'>{$cat_title}</option>";
+            }
+            ?>
         </select>
-    </div>-->
+    </div>
 
     <div class="form-group">
         <label for="title">Post Author</label>
