@@ -20,9 +20,7 @@
         <?php
             $query = "SELECT * FROM category";
             $result = mysqli_query($connection , $query);
-            if (!$result) {
-                die("QUERY FAILED" . mysqli_error($connection));
-            }
+            confirmQuery($result);
         ?>
         <h4>Blog Categories</h4>
         <div class="row">
@@ -30,7 +28,9 @@
                 <ul class="list-unstyled">
                     <?php
                         while($row = mysqli_fetch_assoc($result)) {
-                            echo "<li><a href='#'> {$row['cat_title']} </a></li>";
+                            $cat_id = $row['cat_id'];
+                            $cat_title = $row['cat_title'];
+                            echo "<li><a href='category.php?category={$cat_id}'> {$cat_title} </a></li>";
                         }
                     ?>
                 </ul>
