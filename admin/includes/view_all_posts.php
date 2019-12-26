@@ -3,7 +3,7 @@
         $post_id = $_GET['delete'];
         $query = "DELETE from posts WHERE post_id = {$post_id}";
         $result = mysqli_query($connection , $query);
-        confirm($result);
+        confirmQuery($result);
     }
 ?>
 
@@ -25,9 +25,7 @@
     <?php
     $query = "SELECT * FROM posts";
     $result = mysqli_query($connection , $query);
-    if (!$result) {
-        die("QUERY FAILED" . mysqli_error($connection));
-    }
+    confirmQuery($result);
     while($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
         echo "<td>{$row['post_id']}</td>";
@@ -36,7 +34,7 @@
 
         $query = "SELECT * FROM category WHERE cat_id = {$row['post_category_id']}";
         $cat_query = mysqli_query($connection , $query);
-        confirm($cat_query);
+        confirmQuery($cat_query);
         $cat_result = mysqli_fetch_assoc($cat_query);
         echo "<td>{$cat_result['cat_title']}</td>";
 

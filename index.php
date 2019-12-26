@@ -15,9 +15,7 @@
             <?php
                  $query = "SELECT * FROM posts";
                  $result = mysqli_query($connection , $query);
-                 if(!$result) {
-                    echo 'Query Failed' . mysqli_error($connection);
-                 }
+                 confirmQuery($result);
                  while($row = mysqli_fetch_assoc($result)){
             ?>
             <h1 class="page-header">
@@ -26,7 +24,7 @@
             </h1>
             <!-- First Blog Post -->
             <h2>
-                <a href="#"><?php echo $row['post_title']; ?></a>
+                <a href="post.php?p_id=<?php echo $row['post_id']; ?>"><?php echo $row['post_title']; ?></a>
             </h2>
             <p class="lead">
                 by <a href="index.php"><?php echo $row['post_author']; ?></a>

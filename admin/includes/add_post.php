@@ -19,7 +19,7 @@ if(isset($_POST['create_post'])){
     $query = "INSERT INTO posts( post_title , post_author , post_category_id , post_status , post_image  , post_date , post_tags , post_content , post_comment_count)" ;
     $query .= " VALUES('$post_title' , '$post_author' , $post_category_id , '$post_status' , '{$post_image}' , now() , '$post_tags' , '$post_content' , '$post_comment_count')";
     $result = mysqli_query( $connection , $query);
-    confirm($result);
+    confirmQuery($result);
 }
 ?>
 
@@ -38,7 +38,7 @@ if(isset($_POST['create_post'])){
             <?php
             $query = "SELECT * FROM category";
             $result = mysqli_query($connection , $query);
-            confirm($result);
+            confirmQuery($result);
             while ($row1 = mysqli_fetch_assoc($result)) {
                 $cat_id     = $row1['cat_id'];
                 $cat_title  = $row1['cat_title'];

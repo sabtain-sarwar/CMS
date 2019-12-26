@@ -21,7 +21,7 @@
         if (empty($post_image)) {
             $query = "SELECT * FROM posts WHERE post_id = {$post_id}";
             $result = mysqli_query($connection , $query);
-            confirm($result);
+            confirmQuery($result);
             $get_post_img = mysqli_fetch_assoc($result);
             $post_image = $get_post_img['post_image'];
         } else {
@@ -33,14 +33,14 @@
         $query .= " post_status = '{$post_status}' , post_image = '{$post_image}' , post_tags = '{$post_tags}' , ";
         $query .= " post_content = '{$post_content}' , post_date = now() WHERE post_id = {$post_id}";
         $result = mysqli_query($connection , $query);
-        confirm($result);
+        confirmQuery($result);
     }
 
     if(isset($_GET['edit'])) {
         $post_id = $_GET['edit'];
         $query = "SELECT * FROM posts WHERE post_id = {$post_id}";
         $result = mysqli_query($connection, $query);
-        confirm($result);
+        confirmQuery($result);
         $row = mysqli_fetch_assoc($result);
         //print_r($row);
     }
@@ -62,7 +62,7 @@
             <?php
                 $query = "SELECT * FROM category";
                 $result = mysqli_query($connection , $query);
-                confirm($result);
+                confirmQuery($result);
                 while ($row1 = mysqli_fetch_assoc($result)) {
                     $cat_id     = $row1['cat_id'];
                     $cat_title  = $row1['cat_title'];

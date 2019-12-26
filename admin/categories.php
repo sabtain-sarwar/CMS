@@ -33,9 +33,7 @@
                                 $cat_title = $_POST['cat_title'];
                                 $query = "UPDATE category SET cat_title = '{$cat_title}' WHERE cat_id = {$cat_id}";
                                 $result = mysqli_query($connection , $query);
-                                if (!$result) {
-                                    die("QUERY FAILED" . mysqli_error($connection));
-                                }
+                                confirmQuery($result);
                             }
 
                             // Put the click category title to the update category
@@ -44,9 +42,7 @@
                                 $query = "SELECT * FROM category WHERE cat_id = {$id}";
                                 $result = mysqli_query($connection , $query);
                                 $row = mysqli_fetch_assoc($result);
-                                if (!$result) {
-                                    die("QUERY FAILED" . mysqli_error($connection));
-                                }
+                                confirmQuery($result);
                         ?>
                         <form action="" method="post">
                             <div class="form-group">
