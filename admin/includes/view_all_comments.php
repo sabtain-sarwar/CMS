@@ -27,15 +27,25 @@
         echo "<td>{$row['comment_status']}</td>";
         $query = "SELECT * FROM posts where post_id = {$row['comment_post_id']}";
         $result1 = mysqli_query($connection , $query);
-        confirmQuery($result);
+        confirmQuery($result1);
         $row1 = mysqli_fetch_assoc($result1);
         echo "<td><a href='../post.php?p_id={$row['comment_post_id']}'>{$row1['post_title']}</a></td>";
         echo "<td>{$row['comment_date']}</td>";
         echo "<td><a href='#'>Approve</a></td>";
         echo "<td><a href='#'>Unapprove</a></td>";
-        echo "<td><a href='posts.php?delete='>Delete</a></td>";
+        echo "<td><a href='comments.php?delete={$row['comment_id']}'>Delete</a></td>";
         echo "</tr>";
     }
     ?>
     </tbody>
 </table>
+
+<?php
+    if (isset($_GET['delete'])) {
+        $comment_id = $_GET['delete'];
+        $query = "DELETE FROM comments WHERE comment_id = {$comment_id}";
+        $result = mysqli_query($connection , $query);
+        confirmQuery($result);
+        header("Location: comments.php");
+    }
+?>
