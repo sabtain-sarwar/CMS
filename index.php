@@ -17,32 +17,36 @@
                  $result = mysqli_query($connection , $query);
                  confirmQuery($result);
                  while($row = mysqli_fetch_assoc($result)){
+                    $post_status = $row['post_status'];
+                    if ($post_status == 'Published') {
             ?>
-            <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
-            </h1>
-            <!-- First Blog Post -->
-            <h2>
-                <a href="post.php?p_id=<?php echo $row['post_id']; ?>"><?php echo $row['post_title']; ?></a>
-            </h2>
-            <p class="lead">
-                by <a href="index.php"><?php echo $row['post_author']; ?></a>
-            </p>
-            <p><span class="glyphicon glyphicon-time"></span> <?php echo $row['post_date']; ?></p>
-            <hr>
-            <img class="img-responsive" src="images/<?php echo $row['post_image']; ?>" alt="">
-            <hr>
-            <p><?php echo substr($row['post_content'],0,100) . '...'; ?></p>
-            <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-            <hr>
+                        <h1 class="page-header">Page Heading
+                            <small>Secondary Text</small>
+                        </h1>
+                        <!-- First Blog Post -->
+                        <h2>
+                            <a href="post.php?p_id=<?php echo $row['post_id']; ?>"><?php echo $row['post_title']; ?></a>
+                        </h2>
+                        <p class="lead">
+                             by <a href="index.php"><?php echo $row['post_author']; ?></a>
+                        </p>
+                        <p><span class="glyphicon glyphicon-time"></span> <?php echo $row['post_date']; ?></p>
+                        <hr>
+                        <img class="img-responsive" src="images/<?php echo $row['post_image']; ?>" alt="">
+                        <hr>
+                        <p><?php echo substr($row['post_content'],0,100) . '...'; ?></p>
+                        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <hr>
+            <?php
+            } else {
+                echo "<h1 class='text-center'>No Post Found.</h1>";
+            } ?>
+
             <?php } ?>
         </div>
 
-
         <!-- Blog Sidebar Widgets Column -->
         <?php include "includes/sidebar.php"; ?>
-
     </div> <!-- /.row -->
 
     <hr>
