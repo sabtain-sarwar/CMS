@@ -1,4 +1,4 @@
-S<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover">
     <thead>
     <tr>
         <th>ID</th>
@@ -25,11 +25,15 @@ S<table class="table table-bordered table-hover">
         echo "<td>{$row['comment_content']}</td>";
         echo "<td>{$row['comment_email']}</td>";
         echo "<td>{$row['comment_status']}</td>";
-        echo "<td>Todo</td>";
+        $query = "SELECT * FROM posts where post_id = {$row['comment_post_id']}";
+        $result1 = mysqli_query($connection , $query);
+        confirmQuery($result);
+        $row1 = mysqli_fetch_assoc($result1);
+        echo "<td><a href='../post.php?p_id={$row['comment_post_id']}'>{$row1['post_title']}</a></td>";
         echo "<td>{$row['comment_date']}</td>";
         echo "<td><a href='#'>Approve</a></td>";
         echo "<td><a href='#'>Unapprove</a></td>";
-        echo "<td><a href='posts.php?delete=}'>Delete</a></td>";
+        echo "<td><a href='posts.php?delete='>Delete</a></td>";
         echo "</tr>";
     }
     ?>
