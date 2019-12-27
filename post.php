@@ -45,12 +45,17 @@
                         $comment_author      = $_POST['comment_author'];
                         $comment_email       = $_POST['comment_email'];
                         $comment_content     = $_POST['comment_content'];
-                        $comment_post_id     = $_GET['p_id'];
+                        $post_id     = $_GET['p_id'];
 
 
                         $query = "INSERT INTO comments( comment_post_id , comment_author , comment_email , comment_content , comment_status , comment_date )" ;
-                        $query .= " VALUES( $comment_post_id , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' , 'unapproved' , now() )";
+                        $query .= " VALUES( $post_id , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' , 'unapproved' , now() )";
                         $result = mysqli_query( $connection , $query);
+                        confirmQuery($result);
+
+
+                        $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = {$post_id}";
+                        $update_comment_count = mysqli_query( $connection , $query);
                         confirmQuery($result);
                     }
                 ?>

@@ -12,12 +12,12 @@ if(isset($_POST['create_post'])){
     $post_tags        = $_POST['post_tags'];
     $post_content     = $_POST['post_content'];
     $post_date        = date('d-m-y');
-    $post_comment_count = 4 ;
+    // $post_comment_count = 4 ; we are now putting this value dynamically by counting comments
 
     move_uploaded_file($post_image_temp,"../images/$post_image");
 
-    $query = "INSERT INTO posts( post_title , post_author , post_category_id , post_status , post_image  , post_date , post_tags , post_content , post_comment_count)" ;
-    $query .= " VALUES('$post_title' , '$post_author' , $post_category_id , '$post_status' , '{$post_image}' , now() , '$post_tags' , '$post_content' , '$post_comment_count')";
+    $query = "INSERT INTO posts( post_title , post_author , post_category_id , post_status , post_image  , post_date , post_tags , post_content)" ;
+    $query .= " VALUES('$post_title' , '$post_author' , $post_category_id , '$post_status' , '{$post_image}' , now() , '$post_tags' , '$post_content' )";
     $result = mysqli_query( $connection , $query);
     confirmQuery($result);
 }
@@ -79,7 +79,7 @@ if(isset($_POST['create_post'])){
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea type="text" class="form-control" name="post_content" id="" col="30" row="10">
+        <textarea type="text" class="form-control" name="post_content" id="" cols="30" rows="10">
   </textarea>
     </div>
 
