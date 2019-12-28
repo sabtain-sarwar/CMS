@@ -1,25 +1,17 @@
 
 <?php
-if(isset($_POST['create_post'])){
-    $post_title       = $_POST['title'];
-    $post_author      = $_POST['author'];
-    $post_category_id = $_POST['post_category_id'];
-    $post_status      = $_POST['post_status'];
+if(isset($_POST['create_user'])){
+    $firstname      = $_POST['user_firstname'];
+    $lastname       = $_POST['user_lastname'];
+    $username       = $_POST['username'];
+    $user_role      = $_POST['user_role'];
+    $user_email     = $_POST['user_email'];
+    $user_password  = $_POST['user_password'];
 
-    $post_image       = $_FILES['image']['name'];
-    $post_image_temp  = $_FILES['image']['tmp_name'];
-
-    $post_tags        = $_POST['post_tags'];
-    $post_content     = $_POST['post_content'];
-    $post_date        = date('d-m-y');
-    // $post_comment_count = 4 ; we are now putting this value dynamically by counting comments
-
-    move_uploaded_file($post_image_temp,"../images/$post_image");
-
-    $query = "INSERT INTO posts( post_title , post_author , post_category_id , post_status , post_image  , post_date , post_tags , post_content)" ;
-    $query .= " VALUES('$post_title' , '$post_author' , $post_category_id , '$post_status' , '{$post_image}' , now() , '$post_tags' , '$post_content' )";
-    $result = mysqli_query( $connection , $query);
-    confirmQuery($result);
+    $query = "INSERT INTO users(user_firstname , user_lastname , username , user_role , user_email , user_password)";
+    $query .= " VALUES('{$firstname}' , '{$lastname}' , '{$username}' , '{$user_role}' , '{$user_email}' , '{$user_password}')";
+    $createUserQuery = mysqli_query( $connection , $query);
+    confirmQuery($createUserQuery);
 }
 ?>
 
@@ -28,34 +20,22 @@ if(isset($_POST['create_post'])){
 <form action="" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
-        <label for="title">Post Title</label>
-        <input type="text" name="title" class="form-control" placeholder="Enter Title">
+        <label for="firstname">Firstname</label>
+        <input type="text" name="user_firstname" class="form-control" id="firstname" placeholder="Enter Firstname">
     </div>
 
     <div class="form-group">
-        <label for="category">Category</label>
-        <select name="post_category_id" id="" class="form-control" style="width:130px">
-            <?php
-            $query = "SELECT * FROM category";
-            $result = mysqli_query($connection , $query);
-            confirmQuery($result);
-            while ($row1 = mysqli_fetch_assoc($result)) {
-                $cat_id     = $row1['cat_id'];
-                $cat_title  = $row1['cat_title'];
-                echo "<option value='{$cat_id}'>{$cat_title}</option>";
-            }
-            ?>
+        <label for="lastname">Lastname</label>
+        <input type="text" name="user_lastname" class="form-control" id="lastname" placeholder="Enter Lastname">
+    </div>
+
+    <div class="form-group">
+        <label for="role">Role</label>
+        <select name="user_role" id="role" class="form-control" style="width:140px">
+            <option value='subscriber'>Select Options</option>
+            <option value='admin'>Admin</option>
+            <option value='subscriber'>Subscriber</option>
         </select>
-    </div>
-
-    <div class="form-group">
-        <label for="title">Post Author</label>
-        <input type="text" class="form-control" name="author" placeholder="Enter Author Name">
-    </div>
-
-    <div class="form-group">
-        <label for="post_status">Post status</label>
-        <input type="text" class="form-control" name="post_status">
     </div>
 
     <!--<div class="form-group">
@@ -67,23 +47,27 @@ if(isset($_POST['create_post'])){
     </div>-->
 
 
-    <div class="form-group">
+    <!--<div class="form-group">
         <label for="post_image">Post Image</label>
         <input type="file" name="image">
+    </div>-->
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
     </div>
 
     <div class="form-group">
-        <label for="post_tags">Post Tags</label>
-        <input type="text" class="form-control" name="post_tags" placeholder="Enter Post Tags">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="user_email" id="email"  placeholder="Enter Email">
     </div>
 
     <div class="form-group">
-        <label for="post_content">Post Content</label>
-        <textarea type="text" class="form-control" name="post_content" id="" cols="30" rows="10">
-  </textarea>
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="user_password" id="password"  placeholder="Enter Password">
     </div>
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Publish Post" >
+        <input class="btn btn-primary" type="submit" name="create_user" value="Add User" >
     </div>
 </form>

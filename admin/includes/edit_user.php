@@ -54,19 +54,19 @@ if(isset($_GET['edit'])) {
             <input type="text" name="title" class="form-control" value="<?php  echo $row['post_title'];?>">
         </div>
 
+
+
         <div class="form-group">
-            <!-- the is good to have id bcz may be later on we want to style this select element but we can leave it empty and value attr value is the value that's
-             going to get put in the name attr of select element -->
-            <label for="categories">Categories</label>
-            <select name="post_category_id" id="" class="form-control">
+            <label for="role">Role</label>
+            <select name="user_role" id="role" class="form-control" style="width:130px">
                 <?php
-                $query = "SELECT * FROM category";
-                $result = mysqli_query($connection , $query);
-                confirmQuery($result);
+                $query = "SELECT * FROM users";
+                $select_user = mysqli_query($connection , $query);
+                confirmQuery($select_user);
                 while ($row1 = mysqli_fetch_assoc($result)) {
-                    $cat_id     = $row1['cat_id'];
-                    $cat_title  = $row1['cat_title'];
-                    echo "<option value='{$cat_id}'>{$cat_title}</option>";
+                    $user_id     = $row1['user_id'];
+                    $user_role   = $row1['user_role'];
+                    echo "<option value='{$user_id}'>{$user_role}</option>";
                 }
                 ?>
             </select>
