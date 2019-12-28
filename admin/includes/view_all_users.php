@@ -23,9 +23,9 @@
             echo "<td>{$row['user_lastname']}</td>";
             echo "<td>{$row['user_email']}</td>";
             echo "<td>{$row['user_role']}</td>";
-            echo "<td><a href='#'>Edit</a></td>";
             echo "<td><a href='users.php?changeToAdmin={$row['user_id']}'>Admin</a></td>";
             echo "<td><a href='users.php?changeToSub={$row['user_id']}'>Subscriber</a></td>";
+        echo "<td><a href='users.php?source=edit_user&edit_user={$row['user_id']}'>Edit</a></td>";
             echo "<td><a href='users.php?delete={$row['user_id']}'>Delete</a></td>";
         echo "</tr>";
     }
