@@ -26,6 +26,7 @@
 
         // 2 equal symbols mean's equal and 3 equal symbols mean's identical
         if ($username === $db_username && $password === $db_user_password) {
+            $_SESSION['id']         = $db_user_id;
             $_SESSION['username']   = $db_username;
             $_SESSION['firstname']  = $db_user_firstname;
             $_SESSION['lastname']   = $db_user_lastname;
