@@ -24,7 +24,7 @@
             echo "<td>{$row['user_email']}</td>";
             echo "<td>{$row['user_role']}</td>";
             echo "<td><a href='#'>Edit</a></td>";
-            echo "<td><a href='#'>Delete</a></td>";
+            echo "<td><a href='users.php?delete={$row['user_id']}'>Delete</a></td>";
         echo "</tr>";
     }
     ?>
@@ -33,11 +33,11 @@
 
 <?php
 if (isset($_GET['delete'])) {
-    $comment_id = $_GET['delete'];
-    $query = "DELETE FROM comments WHERE comment_id = {$comment_id}";
-    $result = mysqli_query($connection , $query);
-    confirmQuery($result);
-    header("Location: comments.php");
+    $user_id = $_GET['delete'];
+    $query = "DELETE FROM users WHERE user_id = {$user_id}";
+    $delete_user_query = mysqli_query($connection , $query);
+    confirmQuery($delete_user_query);
+    header("Location: users.php");
 }
 
 ?>
