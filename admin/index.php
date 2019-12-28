@@ -56,7 +56,7 @@
                                         <?php
                                              $query = "SELECT * FROM comments";
                                              $select_all_comments = mysqli_query($connection , $query);
-                                             $comment_counts = mysqli_num_rows($select_all_posts);
+                                             $comment_counts = mysqli_num_rows($select_all_comments);
                                              echo "<div class='huge'>{$comment_counts}</div>";
                                         ?>
                                         <div>Comments</div>
@@ -84,8 +84,8 @@
                                         <?php
                                             $query = "SELECT * FROM users";
                                             $select_all_users = mysqli_query($connection , $query);
-                                            $users_counts = mysqli_num_rows($select_all_users);
-                                            echo "<div class='huge'>{$users_counts}</div>";
+                                            $user_counts = mysqli_num_rows($select_all_users);
+                                            echo "<div class='huge'>{$user_counts}</div>";
                                         ?>
                                         <div> Users</div>
                                     </div>
@@ -129,6 +129,55 @@
                         </div>
                     </div>
                 </div> <!-- /.row -->
+
+
+                <?php
+                    $query = "SELECT * FROM posts WHERE post_status = 'draft'";
+                    $select_all_draft_posts = mysqli_query($connection , $query);
+                    $post__draft_count = mysqli_num_rows($select_all_draft_posts);
+
+                    $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
+                    $unapproved_comment_query = mysqli_query($connection , $query);
+                    $unapproved_comment_count = mysqli_num_rows($unapproved_comment_query);
+
+                    $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+                    $select_all_subscribers = mysqli_query($connection , $query);
+                    $subscriber_count = mysqli_num_rows($select_all_subscribers);
+                ?>
+
+                <div class="row">
+                    <script type="text/javascript">
+                          google.charts.load('current', {'packages':['bar']});
+                          google.charts.setOnLoadCallback(drawChart);
+
+                          function drawChart() {
+                              var data = google.visualization.arrayToDataTable([
+                                  ['Data', 'Count'],
+                                  <?php
+                                      $name = ['Active Posts' , 'Draft Posts' , 'Comments' , 'Pending Comments' , 'Users' , 'Subscriber' , 'Categories'];
+                                      $count = [$post_counts , $post__draft_count , $comment_counts , $unapproved_comment_count ,$user_counts , $subscriber_count , $category_counts];
+                                      for ($i = 0 ; $i < 7 ; $i++) {
+                                            echo "['{$name[$i]}' " . ","  . "{$count[$i]}],";
+                                            // echo "['{$name[$i]}' , {$count[$i]}],"; works the same
+                                      }
+                                  ?>
+                              ]);
+
+                              var options = {
+                                  chart: {
+                                      title: '',
+                                      subtitle: '',
+                                  }
+                              };
+
+                              var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+                              chart.draw(data, google.charts.Bar.convertOptions(options));
+                          }
+                        </script>
+                    <div id="columnchart_material" style="width: auto; height: 500px;"></div>
+                </div>
+
             </div><!-- /.container-fluid -->
         </div><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
