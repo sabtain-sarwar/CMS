@@ -56,10 +56,10 @@
                 </a>
                 <ul id="demo" class="collapse">
                     <li>
-                        <a href="#">View all Users</a>
+                        <a href="users.php">View all Users</a>
                     </li>
                     <li>
-                        <a href="#">Add Users</a>
+                        <a href="users.php?source=add_user">Add Users</a>
                     </li>
                 </ul>
             </li>
