@@ -24,6 +24,8 @@
             echo "<td>{$row['user_email']}</td>";
             echo "<td>{$row['user_role']}</td>";
             echo "<td><a href='#'>Edit</a></td>";
+            echo "<td><a href='users.php?changeToAdmin={$row['user_id']}'>Admin</a></td>";
+            echo "<td><a href='users.php?changeToSub={$row['user_id']}'>Subscriber</a></td>";
             echo "<td><a href='users.php?delete={$row['user_id']}'>Delete</a></td>";
         echo "</tr>";
     }
@@ -40,4 +42,20 @@ if (isset($_GET['delete'])) {
     header("Location: users.php");
 }
 
+if (isset($_GET['changeToAdmin'])) {
+    $user_id = $_GET['changeToAdmin'];
+    $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$user_id}";
+    $change_to_admin_query = mysqli_query($connection , $query);
+    confirmQuery($change_to_admin_query);
+    header("Location: users.php");
+}
+
+
+if (isset($_GET['changeToSub'])) {
+    $user_id = $_GET['changeToSub'];
+    $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$user_id}";
+    $change_to_sub_query = mysqli_query($connection , $query);
+    confirmQuery($change_to_sub_query);
+    header("Location: users.php");
+}
 ?>
